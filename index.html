@@ -17,6 +17,53 @@
             min-height: 100vh;
         }
         .dashboard-container { max-width: 1900px; margin: 0 auto; }
+        
+        /* Navigation Bar */
+        .navbar {
+            background: #0A1812;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            margin-bottom: 24px;
+            padding: 12px 0;
+        }
+        .nav-container {
+            max-width: 1900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logo i { font-size: 1.8rem; color: #D4AF37; }
+        .logo h2 { font-size: 1.3rem; font-weight: 600; color: #F5E7C8; }
+        .logo p { font-size: 0.7rem; color: #9BB8A8; }
+        .nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+        .nav-btn {
+            background: transparent;
+            border: 1px solid #2F5E4A;
+            color: #B6C9C1;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .nav-btn:hover, .nav-btn.active {
+            background: #1A3B2B;
+            border-color: #D4AF37;
+            color: #D4AF37;
+        }
+        
         .main-header {
             display: flex;
             justify-content: space-between;
@@ -88,6 +135,102 @@
         }
         .card-header h2 i { color: #D4AF37; margin-right: 10px; }
         .chart-wrapper { position: relative; height: 520px; width: 100%; }
+        
+        /* Pakej Info Table */
+        .pakej-info-section {
+            background: #0F1F18;
+            border-radius: 24px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.7), 0 0 0 1px rgba(212, 175, 55, 0.15);
+        }
+        .pakej-info-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        .pakej-info-header h3 {
+            font-size: 1.2rem;
+            color: #D4AF37;
+        }
+        .pakej-info-header h3 i {
+            margin-right: 8px;
+        }
+        .pakej-table {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .pakej-row {
+            background: #0A1812;
+            border-radius: 16px;
+            padding: 16px 20px;
+            border: 1px solid #2F5E4A;
+            transition: all 0.2s;
+        }
+        .pakej-row:hover {
+            border-color: #D4AF37;
+            background: #15382A;
+        }
+        .pakej-row-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .pakej-badge {
+            background: #1A3B2B;
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #D4AF37;
+            border: 1px solid #D4AF37;
+        }
+        .btn-laporan {
+            background: #1A3B2B;
+            border: 1px solid #D4AF37;
+            color: #D4AF37;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-laporan:hover {
+            background: #D4AF37;
+            color: #0A1210;
+        }
+        .pakej-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            font-size: 0.85rem;
+        }
+        .detail-item {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .detail-label {
+            color: #9BB8A8;
+            font-weight: 500;
+            min-width: 110px;
+        }
+        .detail-value {
+            color: #EBE3D5;
+            font-weight: 500;
+        }
+        
         .pakej-stats {
             display: flex;
             gap: 16px;
@@ -110,6 +253,7 @@
         .pakej-chip:hover { border-color: #D4AF37; background: #15382A; transform: translateY(-2px); }
         .pakej-chip i { color: #D4AF37; }
         .pakej-color { width: 14px; height: 14px; border-radius: 4px; margin-right: 6px; }
+        
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -162,6 +306,24 @@
     </style>
 </head>
 <body>
+<!-- Navigation Bar -->
+<div class="navbar">
+    <div class="nav-container">
+        <div class="logo">
+            <i class="fas fa-tree"></i>
+            <div>
+                <h2>FELDA Palong 7</h2>
+                <p>Laporan Eksekutif · 2026</p>
+            </div>
+        </div>
+        <div class="nav-links">
+            <a href="dashboard.html" class="nav-btn"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            <a href="index.html" class="nav-btn active"><i class="fas fa-chart-gantt"></i> Gantt Chart</a>
+            <a href="upload.html" class="nav-btn"><i class="fas fa-upload"></i> Upload Data</a>
+        </div>
+    </div>
+</div>
+
 <div class="dashboard-container">
     <div class="main-header">
         <div class="title-section">
@@ -189,6 +351,15 @@
         <div class="pakej-stats" id="pakejChipsContainer"></div>
     </div>
 
+    <!-- Maklumat Asas Pakej -->
+    <div class="pakej-info-section">
+        <div class="pakej-info-header">
+            <h3><i class="fas fa-folder-open"></i> MAKLUMAT ASAS PAKEJ</h3>
+            <span style="font-size: 0.75rem; color: #9BB8A8;"><i class="fas fa-info-circle"></i> Klik "Laporan Prestasi" untuk lihat Gantt mengikut pakej</span>
+        </div>
+        <div class="pakej-table" id="pakejInfoContainer"></div>
+    </div>
+
     <div class="modal-overlay" id="detailModal">
         <div class="modal">
             <div class="modal-header">
@@ -213,7 +384,6 @@
         const TOTAL_WEEKS = 48;
         const WEEK_PER_MONTH = 4;
 
-        // Warna pakej
         const PAKEJ_COLORS = {
             'A': { plan: '#5FA89A', actual: '#D4AF37' },
             'B': { plan: '#4E9B8C', actual: '#C9A32E' },
@@ -222,10 +392,40 @@
             'E': { plan: '#206658', actual: '#A37C1C' }
         };
 
-        // 3 AKTIVITI UTAMA (setiap ada Plan dan Sebenar) - 6 baris
-        // Urutan: Memerun & Kumpul (Plan), Memerun & Kumpul (Sebenar),
-        //         Plough 2 Pusingan (Plan), Plough 2 Pusingan (Sebenar),
-        //         Membaris & Teres (Plan), Membaris & Teres (Sebenar)
+        // Data Dummy untuk Maklumat Pakej
+        const PAKEJ_INFO = {
+            'A': {
+                pemborong: 'ABC Resources Sdn Bhd',
+                noKontrak: '21000123456',
+                noPO: '5100123456',
+                tempohKontrak: '01/01/2026 - 30/06/2026'
+            },
+            'B': {
+                pemborong: 'Majujaya Plantation Sdn Bhd',
+                noKontrak: '21000123457',
+                noPO: '5100123457',
+                tempohKontrak: '01/01/2026 - 30/09/2026'
+            },
+            'C': {
+                pemborong: 'Kencana Agro Sdn Bhd',
+                noKontrak: '21000123458',
+                noPO: '5100123458',
+                tempohKontrak: '15/01/2026 - 15/10/2026'
+            },
+            'D': {
+                pemborong: 'Sri Meranti Holdings Sdn Bhd',
+                noKontrak: '21000123459',
+                noPO: '5100123459',
+                tempohKontrak: '01/02/2026 - 30/11/2026'
+            },
+            'E': {
+                pemborong: 'Desa Murni Enterprise',
+                noKontrak: '21000123460',
+                noPO: '5100123460',
+                tempohKontrak: '01/03/2026 - 31/12/2026'
+            }
+        };
+
         const ACTIVITY_ITEMS = [
             { name: 'MEMERUN & KUMPUL (PERANCANGAN)', taskId: 'memerun_plan', type: 'plan' },
             { name: 'MEMERUN & KUMPUL (SEBENAR)', taskId: 'memerun_actual', type: 'actual' },
@@ -237,7 +437,6 @@
 
         const Y_LABELS = ACTIVITY_ITEMS.map(item => item.name);
 
-        // ---------- DATA PAKEJ A (ORIGINAL - TIDAK DIUBAH) ----------
         const pakejAData = {
             id: 'A', name: 'PAKEJ A',
             tasks: {
@@ -250,7 +449,6 @@
             }
         };
 
-        // Jana dummy B, C, D, E
         function generateDummyPakej(id, offset) {
             const shift = (offset * 4) % 35;
             return {
@@ -279,7 +477,6 @@
             generateDummyPakej('E', 4)
         ];
 
-        // Fungsi untuk convert weeks ke intervals (sama seperti asal)
         function weeksToIntervals(weeksArray) {
             if (!weeksArray || weeksArray.length === 0) return [];
             const intervals = [];
@@ -298,7 +495,7 @@
             return intervals;
         }
 
-        // ========== PLUGIN: GARIS PEMBAHAGI BULAN (WARNA PUTIH TEBAL) ==========
+        // PLUGINS
         const monthDividersPlugin = {
             id: 'monthDividers',
             afterDraw(chart) {
@@ -306,8 +503,6 @@
                 const yBottom = chart.chartArea.bottom;
                 const yTop = chart.chartArea.top;
                 ctx.save();
-
-                // Garis pembahagi bulan - PUTIH TEBAL
                 ctx.setLineDash([6, 8]);
                 ctx.lineWidth = 2.5;
                 ctx.strokeStyle = '#FFFFFF';
@@ -320,8 +515,6 @@
                         ctx.stroke();
                     }
                 }
-
-                // Garis halus untuk setiap minggu (putih pudar)
                 ctx.setLineDash([2, 6]);
                 ctx.lineWidth = 0.8;
                 ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
@@ -336,13 +529,11 @@
                         }
                     }
                 }
-
                 ctx.setLineDash([]);
                 ctx.restore();
             }
         };
 
-        // Plugin header bulan
         const customHeaderPlugin = {
             id: 'customHeader',
             afterDraw(chart) {
@@ -378,20 +569,16 @@
             }
         };
 
-        // ========== BINA DATASET (FORMAT SAMA SEPERTI ASAL) ==========
         function buildDatasets(pakejList, forModalPakejId = null) {
             const datasets = [];
             const filteredPakej = forModalPakejId ? pakejList.filter(p => p.id === forModalPakejId) : pakejList;
-
             filteredPakej.forEach(pakej => {
                 ACTIVITY_ITEMS.forEach((item, idx) => {
                     const task = pakej.tasks[item.taskId];
                     if (!task?.weeks?.length) return;
-
                     const intervals = weeksToIntervals(task.weeks);
                     const color = PAKEJ_COLORS[pakej.id][item.type];
                     const yLabel = Y_LABELS[idx];
-
                     intervals.forEach(intv => {
                         datasets.push({
                             label: `${pakej.id} · ${item.name}`,
@@ -411,9 +598,7 @@
             return datasets;
         }
 
-        // ========== RENDER MASTER CHART (ALIGNMENT LEFT) ==========
         const ctxMaster = document.getElementById('masterGanttChart').getContext('2d');
-
         const masterChart = new Chart(ctxMaster, {
             type: 'bar',
             data: { labels: Y_LABELS, datasets: buildDatasets(pakejList) },
@@ -432,21 +617,8 @@
                     legend: { display: false }
                 },
                 scales: {
-                    x: {
-                        min: 0, max: 48,
-                        grid: { display: false },
-                        ticks: { display: false },
-                        title: { display: false }
-                    },
-                    y: {
-                        grid: { display: false },
-                        ticks: {
-                            color: '#EBE3D5',
-                            font: { weight: '600', size: 11 },
-                            align: 'left',
-                            crossAlign: 'far'
-                        }
-                    }
+                    x: { min: 0, max: 48, grid: { display: false }, ticks: { display: false }, title: { display: false } },
+                    y: { grid: { display: false }, ticks: { color: '#EBE3D5', font: { weight: '600', size: 11 }, align: 'left', crossAlign: 'far' } }
                 },
                 onClick: (e, items) => {
                     if (items.length) {
@@ -458,7 +630,45 @@
             plugins: [monthDividersPlugin, customHeaderPlugin]
         });
 
-        // ========== MODAL ==========
+        // Render Maklumat Pakej
+        function renderPakejInfo() {
+            const container = document.getElementById('pakejInfoContainer');
+            container.innerHTML = '';
+            const pakejOrder = ['A', 'B', 'C', 'D', 'E'];
+            pakejOrder.forEach(id => {
+                const info = PAKEJ_INFO[id];
+                const color = PAKEJ_COLORS[id];
+                const row = document.createElement('div');
+                row.className = 'pakej-row';
+                row.innerHTML = `
+                    <div class="pakej-row-header">
+                        <div class="pakej-badge">
+                            <span class="pakej-color" style="background:${color.plan}; display:inline-block; margin-right:8px;"></span>
+                            <span class="pakej-color" style="background:${color.actual}; display:inline-block; margin-right:8px;"></span>
+                            PAKEJ ${id}
+                        </div>
+                        <button class="btn-laporan" data-pakej="${id}">
+                            <i class="fas fa-chart-line"></i> Laporan Prestasi
+                        </button>
+                    </div>
+                    <div class="pakej-details">
+                        <div class="detail-item"><span class="detail-label">Pemborong:</span><span class="detail-value">${info.pemborong}</span></div>
+                        <div class="detail-item"><span class="detail-label">No. Kontrak:</span><span class="detail-value">${info.noKontrak}</span></div>
+                        <div class="detail-item"><span class="detail-label">No. PO:</span><span class="detail-value">${info.noPO}</span></div>
+                        <div class="detail-item"><span class="detail-label">Tempoh Kontrak:</span><span class="detail-value">${info.tempohKontrak}</span></div>
+                    </div>
+                `;
+                container.appendChild(row);
+            });
+            // Attach event listeners to buttons
+            document.querySelectorAll('.btn-laporan').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const pakejId = btn.getAttribute('data-pakej');
+                    openModal(pakejId);
+                });
+            });
+        }
+
         let modalChart = null;
         const ctxModal = document.getElementById('modalGanttChart').getContext('2d');
 
@@ -486,15 +696,7 @@
                     },
                     scales: {
                         x: { min: 0, max: 48, grid: { display: false }, ticks: { display: false } },
-                        y: {
-                            grid: { display: false },
-                            ticks: {
-                                color: '#EBE3D5',
-                                font: { weight: '600', size: 11 },
-                                align: 'left',
-                                crossAlign: 'far'
-                            }
-                        }
+                        y: { grid: { display: false }, ticks: { color: '#EBE3D5', font: { weight: '600', size: 11 }, align: 'left', crossAlign: 'far' } }
                     }
                 },
                 plugins: [monthDividersPlugin, customHeaderPlugin]
@@ -502,7 +704,6 @@
             document.getElementById('detailModal').classList.add('show');
         }
 
-        // ========== CHIPS ==========
         function renderChips() {
             const container = document.getElementById('pakejChipsContainer');
             container.innerHTML = '';
@@ -516,7 +717,9 @@
                 container.appendChild(chip);
             });
         }
+        
         renderChips();
+        renderPakejInfo();
 
         document.getElementById('closeModalBtn').addEventListener('click', () => {
             document.getElementById('detailModal').classList.remove('show');
