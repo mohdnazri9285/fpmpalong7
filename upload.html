@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Data Kerja · FELDA Palong 7</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0A1210;
+            color: #E9F0E9;
+            min-height: 100vh;
+        }
+        .navbar {
+            background: #0A1812;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 0 32px;
+        }
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logo i { font-size: 1.8rem; color: #D4AF37; }
+        .logo h2 { font-size: 1.3rem; font-weight: 600; color: #F5E7C8; }
+        .logo p { font-size: 0.7rem; color: #9BB8A8; }
+        .nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+        .nav-btn {
+            background: transparent;
+            border: 1px solid #2F5E4A;
+            color: #B6C9C1;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .nav-btn:hover, .nav-btn.active {
+            background: #1A3B2B;
+            border-color: #D4AF37;
+            color: #D4AF37;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 48px 32px;
+        }
+        .upload-card {
+            background: #0F1F18;
+            border-radius: 24px;
+            padding: 32px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            text-align: center;
+        }
+        .upload-card h1 {
+            font-size: 1.8rem;
+            color: #F5E7C8;
+            margin-bottom: 12px;
+        }
+        .upload-card h1 i {
+            color: #D4AF37;
+            margin-right: 12px;
+        }
+        .upload-area {
+            border: 2px dashed #3A6853;
+            border-radius: 20px;
+            padding: 60px 40px;
+            margin: 32px 0;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .upload-area:hover {
+            border-color: #D4AF37;
+            background: rgba(212, 175, 55, 0.05);
+        }
+        .upload-area i {
+            font-size: 4rem;
+            color: #5FA89A;
+            margin-bottom: 16px;
+        }
+        .upload-area p {
+            color: #9BB8A8;
+            margin: 8px 0;
+        }
+        .file-input {
+            display: none;
+        }
+        .btn-upload {
+            background: #1A3B2B;
+            border: 1px solid #D4AF37;
+            color: #D4AF37;
+            padding: 12px 32px;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-upload:hover {
+            background: #2A5B43;
+        }
+        .info-text {
+            color: #8AA89A;
+            font-size: 0.75rem;
+            margin-top: 24px;
+        }
+        .preview {
+            margin-top: 24px;
+            padding: 16px;
+            background: #0A1812;
+            border-radius: 12px;
+            display: none;
+        }
+        .preview.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-tree"></i>
+                <div>
+                    <h2>FELDA Palong 7</h2>
+                    <p>Laporan Eksekutif · 2026</p>
+                </div>
+            </div>
+            <div class="nav-links">
+                <a href="dashboard.html" class="nav-btn"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <a href="index.html" class="nav-btn"><i class="fas fa-chart-gantt"></i> Gantt Chart</a>
+                <a href="upload.html" class="nav-btn active"><i class="fas fa-upload"></i> Upload Data</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="upload-card">
+            <h1><i class="fas fa-cloud-upload-alt"></i> Upload Data Kerja</h1>
+            <p style="color: #9BB8A8;">Muat naik fail data kerja untuk dikemaskini ke dalam Gantt Chart</p>
+
+            <div class="upload-area" id="uploadArea">
+                <i class="fas fa-file-excel"></i>
+                <p><strong>Klik atau drag & drop fail di sini</strong></p>
+                <p class="small-text">Format: CSV atau Excel (.xlsx, .csv)</p>
+                <input type="file" id="fileInput" class="file-input" accept=".csv,.xlsx,.xls">
+            </div>
+
+            <button class="btn-upload" id="uploadBtn">
+                <i class="fas fa-upload"></i> Proses Data
+            </button>
+
+            <div class="preview" id="preview">
+                <h3><i class="fas fa-check-circle" style="color: #5FA89A;"></i> Data Berjaya Diproses</h3>
+                <p id="previewText" style="color: #B6C9C1; margin-top: 8px;"></p>
+                <a href="index.html" class="btn-upload" style="display: inline-block; margin-top: 16px; text-decoration: none;">
+                    <i class="fas fa-chart-gantt"></i> Lihat Gantt Chart
+                </a>
+            </div>
+
+            <div class="info-text">
+                <i class="fas fa-info-circle"></i> Format fail: Kolom pertama = Nama Aktiviti, Kolom seterusnya = Minggu 1-48 (1 = Plan, 2 = Sebenar)
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const uploadBtn = document.getElementById('uploadBtn');
+        const preview = document.getElementById('preview');
+        const previewText = document.getElementById('previewText');
+        let selectedFile = null;
+
+        uploadArea.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.style.borderColor = '#D4AF37';
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.style.borderColor = '#3A6853';
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.style.borderColor = '#3A6853';
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                selectedFile = files[0];
+                fileInput.files = files;
+                previewText.innerHTML = `Fail dipilih: ${selectedFile.name}`;
+            }
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                selectedFile = e.target.files[0];
+                previewText.innerHTML = `Fail dipilih: ${selectedFile.name}`;
+            }
+        });
+
+        uploadBtn.addEventListener('click', () => {
+            if (!selectedFile) {
+                alert('Sila pilih fail terlebih dahulu.');
+                return;
+            }
+
+            // Simulasi proses upload (boleh diganti dengan logik sebenar)
+            preview.classList.add('show');
+            previewText.innerHTML = `Data daripada fail "${selectedFile.name}" berjaya dimuat naik. Gantt Chart akan dikemaskini.`;
+            
+            // Simpan ke localStorage untuk demo
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                localStorage.setItem('uploadedData', e.target.result);
+                localStorage.setItem('uploadedFileName', selectedFile.name);
+            };
+            reader.readAsText(selectedFile);
+        });
+    </script>
+</body>
+</html>
